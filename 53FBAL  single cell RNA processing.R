@@ -219,27 +219,3 @@ library(ggplot2)
 
 DimPlot(merged_seurat_non_doublets_filtered)
 
-library(Seurat)
-
-# Define the clusters you want to subset
-clusters_to_subset <- c(0, 4, 5, 6, 7, 10, 11, 13, 15)
-
-# Subset the Seurat object based on these clusters
-Epithelial_cells <- subset(merged_seurat_non_doublets_filtered, idents = clusters_to_subset)
-
-# Check the resulting subsetted Seurat object
-print(Epithelial_cells)
-
-# Optionally, save the subsetted Seurat object
-saveRDS(Epithelial_cells, file = "Epithelial_cells.rds")
-
-DimPlot(Epithelial_cells)
-
-tail(Epithelial_cells)
-
-
-# Ensure the predicted cell types are set as a factor with the levels ordered
-merged_seurat_filtered$predicted_cell_type <- factor(merged_seurat_filtered$predicted_cell_type)
-
-# Create a DimPlot colored by predicted cell type
-DimPlot(merged_seurat_non_doublets_filtered, reduction = "umap", group.by = "orig.ident", label = TRUE, repel = TRUE)
