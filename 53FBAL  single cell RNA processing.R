@@ -205,17 +205,5 @@ merged_seurat_non_doublets_filtered <- FindNeighbors(merged_seurat_non_doublets_
 merged_seurat_non_doublets_filtered <- FindClusters(merged_seurat_non_doublets_filtered, verbose = FALSE)
 DimPlot(merged_seurat_non_doublets_filtered, label = TRUE)
 
-library(Seurat)
 
-# Identify epithelial cells based on the predicted cell type
-epithelial_cells <- WhichCells(merged_seurat_non_doublets_filtered, expression = predicted_cell_type == "Epithelial_cells")
-
-# Create a DimPlot highlighting epithelial cells
-DimPlot(merged_seurat_non_doublets_filtered, reduction = "umap", group.by = "predicted_cell_type", cells.highlight = epithelial_cells, cols.highlight = "red", pt.size = 1)
-
-saveRDS(merged_seurat_non_doublets_filtered, "merged_seurat_non_doublets_filtered.RDS")
-
-library(ggplot2)
-
-DimPlot(merged_seurat_non_doublets_filtered)
 
